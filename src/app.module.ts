@@ -9,6 +9,7 @@ import { Listing } from './entities/listings.entity';
 import { BodyType } from './entities/nested/body-type.entity';
 import { Make } from './entities/nested/makes.entity';
 import { Model } from './entities/nested/models.entity';
+import { HealthModule } from './health/health.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { Model } from './entities/nested/models.entity';
       envFilePath: `.env.${process.env.NODE_ENV}`,
       ignoreEnvFile: process.env.NODE_ENV === 'production',
     }),
+    HealthModule,
     TypeOrmModule.forFeature([Listing, BodyType, Make, Model]),
     DatabaseModule,
   ],
