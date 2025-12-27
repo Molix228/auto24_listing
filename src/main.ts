@@ -11,7 +11,7 @@ async function bootstrap() {
       options: {
         client: {
           clientId: 'listing-service-client',
-          brokers: ['localhost:9092'],
+          brokers: [process.env.KAFKA_BROKER || ''],
           connectionTimeout: 3000,
           requestTimeout: 25000,
         },
