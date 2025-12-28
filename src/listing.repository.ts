@@ -45,14 +45,22 @@ export class ListingRepository {
       const make = await this.makesRepo.findOne({
         where: { id: makeId },
       });
-      if (!make) throw new NotFoundException('Body type with ID not found');
+      if (!make) throw new NotFoundException('Make with ID not found');
 
       // Check Model
       const model = await this.modelsRepo.findOne({
         where: { id: modelId },
         relations: ['make'],
       });
-      if (!model) throw new NotFoundException('Body type with ID not found');
+      if (!model) throw new NotFoundException('Model with ID not found');
+
+      if (!model.make || model.make.id !== make.id) {
+        console.error('Debug Check: ', {
+          modelFound: !!model,
+          makeInModel: model?.make,
+          expectedMakeId: make.id,
+        });
+      }
 
       if (model.make.id !== make.id)
         throw new NotFoundException('Model does not match to Make');
