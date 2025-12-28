@@ -7,7 +7,7 @@ export class Make {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'varchar', length: 100, nullable: false, unique: true })
+  @Column({ type: 'varchar', length: 100, nullable: true, unique: true })
   make: string;
 
   @OneToMany(() => Model, (model) => model.make)
